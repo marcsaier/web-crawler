@@ -17,7 +17,6 @@ public class Scraper extends Thread {
 
     @Override
     public void run () {
-
         try {
             Document webSite = Jsoup.connect(url).get();
             Pattern email = Pattern.compile("[a-zA-Z\\.]{2,20}@[a-zA-Z\\.-]{2,20}\\.[com|org|net|edu|de]{3}");
@@ -28,15 +27,13 @@ public class Scraper extends Thread {
                 System.out.println(matcher.group());
             }
             while (matcher2.find()) {
-                String match = matcher.group(1);
+                String match = matcher2.group(1);
                 followUrls.add(match);
             }
             System.out.println("Bis hier ist alles gut");
-            for (int i=0; i<=followUrls.size(); i++){
+            for (int i=0; i<=followUrls.size(); i++) {
                 System.out.println(followUrls.get(i));
-            }    
-            
-            
+            }
         }
         catch (IllegalStateException e) {
             System.err.println("Keine URLS gefunden auf dieser Seite");
